@@ -35,7 +35,7 @@ services:
     volumes:
       - ./db:/var/lib/mysql
     container_name: db  
-    #command: --init-file ./init.sql
+    command: --init-file ./init.sql
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_ROOT_USER=root
