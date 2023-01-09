@@ -1,0 +1,45 @@
+version: '3.8'
+
+networks:
+  app-network:
+    
+volumes:
+  app-data:
+
+services:
+  nginx:
+    image: nginx:1.21.6-alpine
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./src:/var/www
+      - ./nginx:/etc/nginx/conf.d
+    networks:
+      app-network:
+
+  backend:
+    build:
+      context: .
+    container_name: backend
+    volumes:
+      - ./src:/var/www
+    networks:
+      app-network:
+
+  db:
+    image: mysql:8
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db:/var/lib/mysql
+    container_name: db  
+    #command: --init-file ./init.sql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_ROOT_USER=root
+      - MYSQL_DATABASE=test
+      - MYSQL_ROOT_HOST=%
+    networks:
+      app-network:
