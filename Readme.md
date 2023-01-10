@@ -1,12 +1,21 @@
 # Laravel task app
-    I've implemented only a small part of the app with no frontend. Just some archtecture moments (get Article list). I guess i would better use doctrine here as ORM. Looks like laravel has DI implementation so it should be used too. Data validation, error handling are needed too.
-    Auth for manage api.
+    I've implemented some endpoints. No frontend styles are applied.
+    I think i would better use doctrine as orm here. Did not implement all endpoints and more complex features like auth for /manage system part. Just need time to investigate laravel more.
+    
 ### Getting Started
-###### Run commands in the root folder
- - docker-compose up -d 
--  docker-compose exec backend /bin/sh 
-###### execute commands in "backend" container
-- php artisan migrate
-- php artisan db:seed
+      Run commands to start
+      Up containers:
+      - docker-compose up -d
 
-localhost:8000
+      Go into backend container:
+      - docker-compose exec backend /bin/sh
+
+      then inside the container run:
+         - composer install
+         - php artisan migrate
+         - php artisan db:seed
+
+       done
+
+       localhost:8000 - main page
+       localhost:8000/manage - manage page
