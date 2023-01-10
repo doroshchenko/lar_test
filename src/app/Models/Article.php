@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Article extends Model
 {
     use HasUuids;
 
@@ -15,7 +15,7 @@ class Post extends Model
         'description',
     ];
 
-    public public function category()
+    public function category()
     {
         return $this->belongsTo(Cagegory::class, 'foreign_key');
     }

@@ -23,7 +23,7 @@ return new class extends Migration {
             && Schema::create('articles', function (Blueprint $table) {
                 $table->uuid('id')->primary();
                 $table->string('name', 100);
-                $table->foreignUlid('category_id');
+                $table->foreignUuid('category_id');
                 $table->text("description");
                 $table->timestamps();
             });

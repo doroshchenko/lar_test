@@ -16,9 +16,9 @@ class CategorySeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-            ['uuid' => Str::uuid()->toString(), 'name' => 'world'],
-            ['uuid' => Str::uuid()->toString(), 'name' => 'business'],
-            ['uuid' => Str::uuid()->toString(), 'name' => 'health'],
+            ['id' => Str::uuid()->toString(), 'name' => 'world'],
+            ['id' => Str::uuid()->toString(), 'name' => 'business'],
+            ['id' => Str::uuid()->toString(), 'name' => 'health'],
         ]);
     }
 }

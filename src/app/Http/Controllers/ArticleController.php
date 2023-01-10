@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\ArticleRepository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\DB;
-use App\Repositories\RepositoryInterface;
 
 class ArticleController extends BaseController
 {
-    public function __construct(private RepositoryInterface $repository)
+    public function __construct(private ArticleRepository $articleRepository)
     {
-
     }
 
-    # use php8 Attributes
     /**
      * Get All Articles
      *
@@ -25,15 +23,12 @@ class ArticleController extends BaseController
      */
     public function getList(Request $request): View
     {
-        // param validation
-
         return view(
-            'article-list',
+            'list',
             [
-                // implement parameter parse // table name mapping
-                'articles' => $this->repository->getAll($request->all()),
-                // implement repository
+                'articles' => $this->articleRepository->getAll($request->all()),
                 'categories' => DB::table('categories')->get(),
+                // implement repo
             ]
         );
     }
@@ -42,25 +37,11 @@ class ArticleController extends BaseController
      * Get Article Info
      *
      * @param Request $request
+     *
      * @return View
      */
     public function getOne(Request $request): View
     {
-        return view('article', ['article' => DB::table('categories')->find($request->route('id'))]); // implement repository
-    }
-
-    /**
-     * Create new Article
-     *
-     * @param Request $request
-     *
-     * @return View
-     */
-    public function store(Request $request): View
-    {
-        // validate data and create dto
-        $createArticleDto = $request->all();
-
-        return view('articles');
+        return view('article', ['article' => $this->articleRepository->getById($request->route('id'))]);
     }
 }
