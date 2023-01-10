@@ -24,7 +24,7 @@ class ArticleRepository implements RepositoryInterface
 
     }
 
-    public function getById(string $id): ? Article
+    public function getById(string $id): ?Article
     {
         return Article::find($id); //stdClass??
     }
@@ -36,10 +36,16 @@ class ArticleRepository implements RepositoryInterface
 
     public function create(array $data): ?Article
     {
-        return Article::create(['name' => $data['name'], 'description' => $data['description']]);
+        return Article::create(
+            [
+                'name' => $data['name'],
+                'category_id' => $data['category_id'],
+                'description' => $data['description']
+            ]
+        );
     }
 
-    public function update($id, array $data): ? Article
+    public function update($id, array $data): ?Article
     {
 
     }
